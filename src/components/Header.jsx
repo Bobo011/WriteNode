@@ -5,18 +5,20 @@ import Logo from "../assets/logo.png";
 import { useState } from "react";
 
 export const Header = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(JSON.parse(localStorage.getItem('isAuth')) ||false);
 
   function handleLogin() {
     signInWithPopup(auth, provider).then((result) => {
       console.log(result);
       setIsAuth(true);
+      localStorage.setItem('isAuth',true)
     });
   }
 
   function handleLogOut() {
     signOut(auth);
     setIsAuth(false);
+    localStorage.setItem('isAuth',false)
   }
 
   return (
