@@ -5,12 +5,12 @@ import { getAuth, GoogleAuthProvider} from 'firebase/auth'
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBjWybwjyb-bWHyTpLDuZzIWkNY1XY4HP8",
-  authDomain: "boreal-analog-239910.firebaseapp.com",
-  projectId: "boreal-analog-239910",
-  storageBucket: "boreal-analog-239910.appspot.com",
-  messagingSenderId: "937524896619",
-  appId: "1:937524896619:web:47f9c45668417221d5622e"
+  apiKey: import.meta.env.VITE_REACT_APP_API_KEY,
+  authDomain: import.meta.env.VITE_REACT_APP_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_REACT_APP_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_REACT_APP_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_REACT_APP_ID
 };
 
 // Initialize Firebase
