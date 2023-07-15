@@ -1,16 +1,16 @@
-import { useState,useEffect ,useRef } from "react";
-import { PostCard } from "../components";
+import { useState, useEffect, useRef } from "react";
+import { PostCard, SkeletonCard } from "../components";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase/config";
-import {useTitle} from '../hooks/useTitle'
+import { useTitle } from "../hooks/useTitle";
 
 export const HomePage = () => {
-  useTitle('Home')
+  useTitle("Home");
 
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(new Array(4).fill(false));
   const postRef = useRef(collection(db, "post"));
-  const [toggle,setToggle] = useState(false)
- 
+  const [toggle, setToggle] = useState(false);
+
   useEffect(() => {
     async function getPosts() {
       const data = await getDocs(postRef.current);
@@ -18,15 +18,24 @@ export const HomePage = () => {
         data.docs.map((document) => ({ ...document.data(), id: document.id }))
       );
     }
-    console.log('---');
+    console.log("---");
     getPosts();
-  }, [postRef,toggle]);
+  }, [postRef, toggle]);
 
   return (
     <section>
-      {posts.map((post) => (
-        <PostCard toggle={toggle} setToggle={setToggle} key={post.id} post={post} />
-      ))}
+      {posts.map((post, index) =>
+        post ? (
+          <PostCard
+            toggle={toggle}
+            setToggle={setToggle}
+            key={post.id}
+            post={post}
+          />
+        ) : (
+          <SkeletonCard key={index} />
+        )
+      )}
     </section>
   );
 };
