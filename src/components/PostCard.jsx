@@ -2,7 +2,7 @@ import {doc, deleteDoc} from 'firebase/firestore'
 import { auth,db } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
 
-export const PostCard = ({ post }) => {
+export const PostCard = ({ post,toggle,setToggle }) => {
   const navigate = useNavigate();
   const { id, title, description, author } = post;
   const isAuth = JSON.parse(localStorage.getItem('isAuth'));
@@ -13,7 +13,7 @@ const document =  doc(db,'post', id)
 
 await deleteDoc(document);
 navigate('/')
-
+setToggle(!toggle)
 }
 
   return (

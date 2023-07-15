@@ -1,8 +1,12 @@
 import {addDoc,collection} from 'firebase/firestore'
 import {db,auth} from '../firebase/config'
 import { useNavigate } from 'react-router-dom'
+import {useTitle} from '../hooks/useTitle'
 
 export const CreatePost = () => {
+
+useTitle('Create')
+
 const postRef = collection(db,'post')
 const navigate =useNavigate()
 
